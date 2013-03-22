@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.karmasphere.studio.common.eclipse.library.LibraryClasspathContainer/com.karmasphere.libs.hadoop.v20_203/com/karmasphere/libs/hadoop/v20_203/hadoop-library-0.20.203.xml"/>
+	<classpathentry kind="con" path="com.karmasphere.studio.common.eclipse.library.LibraryClasspathContainer/com.karmasphere.studio.hadoop.client/com/karmasphere/studio/hadoop/client/hadoop-client.xml"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacpp.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacv.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacv-linux-x86.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacv-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacv-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacv-windows-x86.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-bin/javacv-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-cppjars/opencv-2.4.4-android-arm.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-cppjars/opencv-2.4.4-linux-x86.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-cppjars/opencv-2.4.4-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-cppjars/opencv-2.4.4-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-cppjars/opencv-2.4.4-windows-x86.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/javacv-cppjars/opencv-2.4.4-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/hadoop-computer-vision-only/hadoop-computer-vision/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/hadoop-computer-vision-only/hadoop-computer-vision/lib/hadoop-common-0.21.0.jar"/>
+	<classpathentry kind="lib" path="E:/develop/foreign/hadoop-computer-vision-only/hadoop-computer-vision/lib/hadoop-mapred-0.21.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
