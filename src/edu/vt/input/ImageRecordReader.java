@@ -120,6 +120,7 @@ public class ImageRecordReader extends RecordReader<Text, Image> {
 			b.append(image.getWidth() + " ");
 			b.append(image.getHeight());
 			
+			
 			key = new Text(b.toString());
 
 			if (totalXSplits * totalYSplits == 1) {

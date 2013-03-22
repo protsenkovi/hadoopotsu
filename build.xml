@@ -8,6 +8,8 @@
 
 	<target name="init">
 		<tstamp/>
+		<delete dir="../tmp"/>
+		<delete dir="../output"/>
 		<mkdir dir="${build}"/>
 		<copy todir="${lib}" flatten="true">
 			<path id="Hadoop MapReduce 0.20.203 (Apache Hadoop 0.20.203).libraryclasspath">
@@ -47,14 +49,13 @@
 	</target>
 
 	<target name="compile" depends="init" description="compile the source">
-		<path id="build-classpath">
-			<fileset dir="${lib}">
-				<include name="*.jar"/>
-			</fileset>
-		</path>
 		<javac srcdir="${src}" 
 			destdir="${build}">
-			<classpath refid="build-classpath"/>
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="*.jar"/>
+				</fileset>
+			</classpath>
 		</javac>
 	</target>
 
@@ -62,7 +63,7 @@
 		<delete file="${jarname}"/>
 		<jar destfile="${jarname}" filesetmanifest="mergewithoutmain">
             <manifest>
-                <attribute name="Main-Class" value="mainpackage.MainClass"/>
+				<attribute name="Main-Class" value="mainpackage.MainClass"/>
             </manifest>
 			<zipfileset excludes="META-INF/maven/**" src="E:/develop/foreign/javacv-bin/javacpp.jar"/>
             <zipfileset excludes="META-INF/maven/**" src="E:/develop/foreign/javacv-bin/javacv.jar"/>

@@ -23,7 +23,7 @@ import static com.googlecode.javacv.cpp.opencv_core.*;
 import static com.googlecode.javacv.cpp.opencv_imgproc.*;
 
 import edu.vt.io.Image;
-import edu.vt.io.LongArrayWritable;
+import edu.vt.io.*;
 import edu.vt.input.ImageInputFormat;
 
 public class Histogram extends Configured implements Tool {

@@ -42,11 +42,11 @@ import edu.vt.output.ImageOutputFormat;
 public class ThreshApply extends Configured implements Tool {
 	public static class Map extends Mapper<Text, Image, Text, Image> {
 		private final static LongWritable one = new LongWritable(1);
-
+		private static Logger logger = Logger.getLogger(ThreshApply.Map.class.getName());
 		@Override
 		public void map(Text key, Image value, Context context)
 				throws IOException, InterruptedException {
-
+			logger.log(java.util.logging.Level.INFO, "*****************MAP " + key.toString());
 			// Threshold preliminaries
 			File threshdir = new File(context.getConfiguration().get(
 					"mapreduce.imagerecordreader.threshpath"));
@@ -59,7 +59,7 @@ public class ThreshApply extends Configured implements Tool {
 						threshfile));
 				String line, thresholdstr = "";
 				while ((line = reader.readLine()) != null) {
-					if (StringUtils.contains(line, key.toString())) {
+					if (StringUtils.contains(line, key.toString())) { 
 						StringTokenizer tok = new StringTokenizer(line);
 						tok.nextToken();
 						width = tok.nextToken();
@@ -85,17 +85,20 @@ public class ThreshApply extends Configured implements Tool {
 			b.append(" " + width);
 			b.append(" " + height);
 			
-			context.write(new Text(b.toString()), new Image(img));
+			logger.log(java.util.logging.Level.INFO, "width "+ width + " height " + height);
+			context.write(new Text(b.toString()), new Image(imgray));
 		}
 	}
 
 	public static class Reduce extends Reducer<Text, Image, Text, Image> {
 		
 		private static Logger logger = Logger.getLogger(ThreshApply.Reduce.class.getName());
+		private int currentSplit;
 		
 		@Override
 		public void reduce(Text key, Iterable<Image> values, Context context)
 				throws IOException, InterruptedException {
+			logger.log(java.util.logging.Level.INFO, "*********************************REDUCE key: " + key.toString());
 			StringTokenizer tok = new StringTokenizer(key.toString());
 			String filename = tok.nextToken();
 			int width = Integer.valueOf(tok.nextToken());
@@ -111,8 +114,7 @@ public class ThreshApply extends Configured implements Tool {
 			int sizePercent = 0;
 			int sizePixel = 0;
 			int borderPixel = 0;
-			int heightPart = 0;
-			int widthPart = 0;
+			currentSplit = 0;
 			// Ensure that value is not negative
 			borderPixel = context.getConfiguration().getInt("mapreduce.imagerecordreader.borderPixel", 0);
 			if (borderPixel < 0) {
@@ -147,8 +149,7 @@ public class ThreshApply extends Configured implements Tool {
 			
 			
 			Iterator it = values.iterator();
-			
-			int currentSplit = 0;
+					
 			IplImage bigimage = cvCreateImage(new CvSize(width, height), IPL_DEPTH_8U, 1);
 			IplImage imagepart;
 			WindowInfo window;		
@@ -156,14 +157,16 @@ public class ThreshApply extends Configured implements Tool {
 			while (it.hasNext()) {
 				imagepart = ((Image)it.next()).getImage();
 				window  = new WindowInfo();
+				int widthPart = xSplitPixels;
+				int heightPart = ySplitPixels;
 				int x = currentSplit % totalXSplits;
 				int y = currentSplit / totalYSplits;
 
 				// Deal with partial windows
-				if (x * xSplitPixels + width > width) {
+				if (x * xSplitPixels + widthPart > width) {
 					widthPart = width - x * xSplitPixels;
 				}
-				if (y * ySplitPixels + height > height) {
+				if (y * ySplitPixels + heightPart > height) {
 					heightPart = height - y * ySplitPixels;
 				}
 
@@ -191,12 +194,24 @@ public class ThreshApply extends Configured implements Tool {
 						+ window.getHeight() < window.getParentHeight()) {
 					bottom = borderPixel;
 				}
-
+								
+				
 				window.setBorder(top, bottom, left, right);				
 				CvRect roi = window.computeROI();
+				
+				logger.log(java.util.logging.Level.INFO, "currentsplit " + currentSplit + " wPart: " + widthPart + " hPart: " + heightPart);
+				logger.log(java.util.logging.Level.INFO, "imagechannels " + imagepart.nChannels() + " imagedepth " + imagepart.depth());				
+				logger.log(java.util.logging.Level.INFO, "x: " + x + " y: " + y + " xSplitPixels: " + xSplitPixels + " ySplitPixels: " + ySplitPixels);
+				logger.log(java.util.logging.Level.INFO, "width  " + width);
+				logger.log(java.util.logging.Level.INFO, "height " + height);
+				logger.log(java.util.logging.Level.INFO, "sizePercent " + sizePercent);
+				logger.log(java.util.logging.Level.INFO, "roi  w: " + roi.width() + " h: " + roi.height() + " x: " + roi.x() + " y:" + roi.y());
+				logger.log(java.util.logging.Level.INFO, "border top: " + top + " bottom: " + bottom + " left: " + left + " right:" + right);
+				
 				cvSetImageROI(bigimage, roi);
 				
-				logger.log(java.util.logging.Level.INFO, "currentsplit " + currentSplit);
+				
+				
 				// copy sub-image
 				cvCopy(imagepart, bigimage, null);
 				cvResetImageROI(bigimage); 
@@ -239,7 +254,7 @@ public class ThreshApply extends Configured implements Tool {
 		int ok = job.waitForCompletion(true) ? 0 : 1;
 		// Optional
 		Path tmppath = new Path(args[1]);
-		tmppath.getFileSystem(conf).delete(tmppath, true);
+		//tmppath.getFileSystem(conf).delete(tmppath, true);
 		return ok;
 	}
 }
