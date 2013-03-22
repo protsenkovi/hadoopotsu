@@ -107,7 +107,6 @@ public class Histogram extends Configured implements Tool {
 			}
 
 			// Порог
-
 			// Введем два вспомогательных числа:
 			int m = 0; // m - сумма высот всех бинов, домноженных на положение
 						// их середины

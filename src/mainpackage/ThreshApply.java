@@ -41,18 +41,25 @@ import edu.vt.output.ImageOutputFormat;
 
 public class ThreshApply extends Configured implements Tool {
 	public static class Map extends Mapper<Text, Image, Text, Image> {
+		
 		private final static LongWritable one = new LongWritable(1);
 		private static Logger logger = Logger.getLogger(ThreshApply.Map.class.getName());
+		private boolean debug = false;
 		@Override
 		public void map(Text key, Image value, Context context)
 				throws IOException, InterruptedException {
-			logger.log(java.util.logging.Level.INFO, "*****************MAP " + key.toString());
-			// Threshold preliminaries
-			File threshdir = new File(context.getConfiguration().get(
-					"mapreduce.imagerecordreader.threshpath"));
-			int threshold = -1;
+			debug = context.getConfiguration().getBoolean("mapreduce.debug", true);
 			
+			if (debug)
+				logger.log(java.util.logging.Level.INFO, "VLPR *****************MAP " + key.toString());
+			
+			// Threshold preliminaries
+			File threshdir = new File(context.getConfiguration().get("mapreduce.imagerecordreader.threshpath"));
+			int threshold = -1;			
 			String width = "", height = "";
+			
+			// Scan directory with calculated thresholds. Look through files and try to find threshold
+			// corresponding to source image file name. 
 			File[] listfiles = threshdir.listFiles();
 			for (File threshfile : listfiles) {
 				BufferedReader reader = new BufferedReader(new FileReader(
@@ -60,11 +67,11 @@ public class ThreshApply extends Configured implements Tool {
 				String line, thresholdstr = "";
 				while ((line = reader.readLine()) != null) {
 					if (StringUtils.contains(line, key.toString())) { 
+						// threshold file format:  <filename> width height threshold
 						StringTokenizer tok = new StringTokenizer(line);
 						tok.nextToken();
 						width = tok.nextToken();
 						height = tok.nextToken();
-						// threshold file format:  <filename> width height threshold
 						thresholdstr = tok.nextToken();
 						threshold = Integer.valueOf(thresholdstr);
 						break;
@@ -73,40 +80,55 @@ public class ThreshApply extends Configured implements Tool {
 				if (threshold != -1)
 					break;
 			}
-
-			IplImage img = value.getImage();
-			// IplImage greyscale = cvt
-			IplImage imgray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
-			cvCvtColor(img, imgray, CV_RGB2GRAY);
-			cvThreshold(imgray, imgray, threshold, 255, CV_THRESH_BINARY);
 			
-			StringBuilder b = new StringBuilder();
-			b.append(key.toString());
-			b.append(" " + width);
-			b.append(" " + height);
+			if (debug)
+				logger.log(java.util.logging.Level.INFO, "width "+ width + " height " + height);
 			
-			logger.log(java.util.logging.Level.INFO, "width "+ width + " height " + height);
-			context.write(new Text(b.toString()), new Image(imgray));
+			// Getting image piece. In case threshold is not found for some reasons return unchanged piece.
+			// Not sure it is a right behavior, it's exception and produces unnecessary computations.
+			IplImage img = value.getImage();; 
+			IplImage imgray;
+			if (threshold != -1) {
+				imgray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
+				cvCvtColor(img, imgray, CV_RGB2GRAY);
+				cvThreshold(imgray, imgray, threshold, 255, CV_THRESH_BINARY);
+				
+				StringBuilder b = new StringBuilder();
+				b.append(key.toString());
+				b.append(" " + width);
+				b.append(" " + height);
+				context.write(new Text(b.toString()), new Image(imgray));
+			} else {
+				StringBuilder b = new StringBuilder();
+				b.append(key.toString());
+				b.append(" " + width);
+				b.append(" " + height);
+				context.write(new Text(b.toString()), new Image(img));
+			}		
 		}
 	}
 
 	public static class Reduce extends Reducer<Text, Image, Text, Image> {
 		
 		private static Logger logger = Logger.getLogger(ThreshApply.Reduce.class.getName());
+		private boolean debug = false;
 		private int currentSplit;
 		
 		@Override
 		public void reduce(Text key, Iterable<Image> values, Context context)
 				throws IOException, InterruptedException {
-			logger.log(java.util.logging.Level.INFO, "*********************************REDUCE key: " + key.toString());
+			debug = context.getConfiguration().getBoolean("mapreduce.debug", true);
+			
+			if (debug)
+				logger.log(java.util.logging.Level.INFO, "VLPR *********************************REDUCE key: " + key.toString());
+			
+			// Retrieve filename, width, height of source image from key.
 			StringTokenizer tok = new StringTokenizer(key.toString());
 			String filename = tok.nextToken();
 			int width = Integer.valueOf(tok.nextToken());
-			int height = Integer.valueOf(tok.nextToken());
+			int height = Integer.valueOf(tok.nextToken());			
 			
-			boolean byPixel = context.getConfiguration().getBoolean("mapreduce.imagerecordreader.windowbypixel", false);
-			
-			// splits based on configuration parameters
+			// Splits based on configuration parameters
 			int totalXSplits = 0;
 			int totalYSplits = 0;
 			int xSplitPixels = 0;
@@ -114,7 +136,9 @@ public class ThreshApply extends Configured implements Tool {
 			int sizePercent = 0;
 			int sizePixel = 0;
 			int borderPixel = 0;
-			currentSplit = 0;
+			currentSplit = 0;			
+			boolean byPixel = context.getConfiguration().getBoolean("mapreduce.imagerecordreader.windowbypixel", false);
+			
 			// Ensure that value is not negative
 			borderPixel = context.getConfiguration().getInt("mapreduce.imagerecordreader.borderPixel", 0);
 			if (borderPixel < 0) {
@@ -146,14 +170,12 @@ public class ThreshApply extends Configured implements Tool {
 				totalXSplits = (int) Math.ceil(width / (double) Math.min(xSplitPixels, width));
 				totalYSplits = (int) Math.ceil(height / (double) Math.min(ySplitPixels, height));
 			}
-			
-			
-			Iterator it = values.iterator();
 					
 			IplImage bigimage = cvCreateImage(new CvSize(width, height), IPL_DEPTH_8U, 1);
 			IplImage imagepart;
 			WindowInfo window;		
 			
+			Iterator it = values.iterator();
 			while (it.hasNext()) {
 				imagepart = ((Image)it.next()).getImage();
 				window  = new WindowInfo();
@@ -170,8 +192,7 @@ public class ThreshApply extends Configured implements Tool {
 					heightPart = height - y * ySplitPixels;
 				}
 
-				window.setParentInfo(x * xSplitPixels, y * ySplitPixels,
-						height, width);
+				window.setParentInfo(x * xSplitPixels, y * ySplitPixels, height, width);
 				window.setWindowSize(heightPart, widthPart);
 								
 				// Calculate borders
@@ -199,18 +220,18 @@ public class ThreshApply extends Configured implements Tool {
 				window.setBorder(top, bottom, left, right);				
 				CvRect roi = window.computeROI();
 				
-				logger.log(java.util.logging.Level.INFO, "currentsplit " + currentSplit + " wPart: " + widthPart + " hPart: " + heightPart);
-				logger.log(java.util.logging.Level.INFO, "imagechannels " + imagepart.nChannels() + " imagedepth " + imagepart.depth());				
-				logger.log(java.util.logging.Level.INFO, "x: " + x + " y: " + y + " xSplitPixels: " + xSplitPixels + " ySplitPixels: " + ySplitPixels);
-				logger.log(java.util.logging.Level.INFO, "width  " + width);
-				logger.log(java.util.logging.Level.INFO, "height " + height);
-				logger.log(java.util.logging.Level.INFO, "sizePercent " + sizePercent);
-				logger.log(java.util.logging.Level.INFO, "roi  w: " + roi.width() + " h: " + roi.height() + " x: " + roi.x() + " y:" + roi.y());
-				logger.log(java.util.logging.Level.INFO, "border top: " + top + " bottom: " + bottom + " left: " + left + " right:" + right);
+				if (debug) {
+					logger.log(java.util.logging.Level.INFO, "VLPR currentsplit " + currentSplit + " wPart: " + widthPart + " hPart: " + heightPart);
+					logger.log(java.util.logging.Level.INFO, "VLPR imagechannels " + imagepart.nChannels() + " imagedepth " + imagepart.depth());				
+					logger.log(java.util.logging.Level.INFO, "VLPR x: " + x + " y: " + y + " xSplitPixels: " + xSplitPixels + " ySplitPixels: " + ySplitPixels);
+					logger.log(java.util.logging.Level.INFO, "VLPR width  " + width);
+					logger.log(java.util.logging.Level.INFO, "VLPR height " + height);
+					logger.log(java.util.logging.Level.INFO, "VLPR sizePercent " + sizePercent);
+					logger.log(java.util.logging.Level.INFO, "VLPR roi  w: " + roi.width() + " h: " + roi.height() + " x: " + roi.x() + " y:" + roi.y());
+					logger.log(java.util.logging.Level.INFO, "VLPR border top: " + top + " bottom: " + bottom + " left: " + left + " right:" + right);
+				}
 				
-				cvSetImageROI(bigimage, roi);
-				
-				
+				cvSetImageROI(bigimage, roi);				
 				
 				// copy sub-image
 				cvCopy(imagepart, bigimage, null);
@@ -229,6 +250,7 @@ public class ThreshApply extends Configured implements Tool {
 		conf.setInt("mapreduce.imagerecordreader.windowsizepercent", 23);
 		conf.setInt("mapreduce.imagerecordreader.windowoverlappercent", 0);
 		conf.setStrings("mapreduce.imagerecordreader.threshpath", args[1]);
+		conf.setBoolean("mapreduce.debug", true);
 
 		// Create job
 		Job job = new Job(conf);
@@ -254,7 +276,7 @@ public class ThreshApply extends Configured implements Tool {
 		int ok = job.waitForCompletion(true) ? 0 : 1;
 		// Optional
 		Path tmppath = new Path(args[1]);
-		//tmppath.getFileSystem(conf).delete(tmppath, true);
+		tmppath.getFileSystem(conf).delete(tmppath, true);
 		return ok;
 	}
 }
