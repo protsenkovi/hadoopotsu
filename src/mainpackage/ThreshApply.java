@@ -119,12 +119,12 @@ public class ThreshApply extends Configured implements Tool {
 			FileSystem fs = threshdir.getFileSystem(conf);
 			FileStatus[] matches = fs.globStatus(threshdir);
 			if (matches == null) {
-				errors.add(new IOException("Input path does not exist: " + threshdir));
+				errors.add(new IOException("Input path does not exist: " + threshdir.toString()));
 			} else if (matches.length == 0) {
-				errors.add(new IOException("Input Pattern " + threshdir	+ " matches 0 files"));
+				errors.add(new IOException("Input Pattern " + threshdir.toString()	+ " matches 0 files"));
 			} else {
 				if (matches.length != 1) {
-					errors.add(new IOException("More than 1 directory for " + threshdir));
+					errors.add(new IOException("More than 1 directory for " + threshdir.toString()));
 				}
 				
 				FileStatus globStat = matches[0];

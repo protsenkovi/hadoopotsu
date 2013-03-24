@@ -35,7 +35,8 @@ import org.codehaus.jackson.map.util.ArrayBuilders;
 public class MainClass {
 	// main args: <input path> <output path>
 	public static void main(String[] args) throws Exception {
-		String tempdir = "E:/develop/eclipseworkspace/tmp";
+		String tempdir = args[0].substring(0, args[0].length()-1);
+		tempdir = tempdir.substring(0, tempdir.lastIndexOf('/')) + "/tmp";
 		String[] newargs = new String[3];
 		newargs[0] = args[0];
 		newargs[1] = tempdir;
