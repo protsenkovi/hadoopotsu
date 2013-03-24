@@ -129,20 +129,22 @@ public class ThreshApply extends Configured implements Tool {
 				
 				FileStatus globStat = matches[0];
 				for (FileStatus stat : fs.listStatus(globStat.getPath())) {
-					BufferedReader br = new BufferedReader(new InputStreamReader(fs.open(stat.getPath())));
-					String line;
+					if(!stat.isDir()) {
+						BufferedReader br = new BufferedReader(new InputStreamReader(fs.open(stat.getPath())));
+						String line;
 					
-					if (debug) 
-						logger.log(java.util.logging.Level.INFO, "VLPR getImageParameters stat " + stat.getPath().toString());
+						if (debug) 
+							logger.log(java.util.logging.Level.INFO, "VLPR getImageParameters stat " + stat.getPath().toString());
 					
-					while ((line = br.readLine()) != null) {
-						if (debug) { 
-							logger.log(java.util.logging.Level.INFO, "VLPR getImageParameters key " + key.toString());
-							logger.log(java.util.logging.Level.INFO, "VLPR getImageParameters key " + line);
-						}
+						while ((line = br.readLine()) != null) {
+							if (debug) { 
+								logger.log(java.util.logging.Level.INFO, "VLPR getImageParameters key " + key.toString());
+								logger.log(java.util.logging.Level.INFO, "VLPR getImageParameters key " + line);
+							}
 						
-						if (StringUtils.contains(line, key.toString())) {
-							return line;
+							if (StringUtils.contains(line, key.toString())) {
+								return line;
+							}
 						}
 					}
 				}
