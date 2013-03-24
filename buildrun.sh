@@ -1,13 +1,16 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+INPUT_DFS_DIR=/user/hduser/method-otsu-in
+TMP_DFS_DIR=/user/hduser/tmp
+OUTPUT_DFS_DIR=/user/hduser/method-otsu-out
 echo $DIR
 
 ant
 
-sudo -u hduser /usr/local/hadoop/bin/hadoop dfs -rmr /user/hduser/method-otsu-in
-sudo -u hduser /usr/local/hadoop/bin/hadoop dfs -rmr /user/hduser/tmp
-sudo -u hduser /usr/local/hadoop/bin/hadoop dfs -rmr /user/hduser/method-otsu-out
+sudo -u hduser $HADOOP_HOME/bin/hadoop dfs -rmr $INPUT_DFS_DIR
+sudo -u hduser $HADOOP_HOME/bin/hadoop dfs -rmr $TMP_DFS_DIR
+sudo -u hduser $HADOOP_HOME/bin/hadoop dfs -rmr $OUTPUT_DFS_DIR
 
-sudo -u hduser /usr/local/hadoop/bin/hadoop dfs -copyFromLocal $DIR/input /user/hduser/method-otsu-in
+sudo -u hduser $HADOOP_HOME/bin/hadoop dfs -copyFromLocal $DIR/input $INPUT_DFS_DIR
 
-sudo -u hduser /usr/local/hadoop/bin/hadoop jar $DIR/MethodOzuTest.jar /user/hduser/method-otsu-in /user/hduser/method-otsu-out
+sudo -u hduser $HADOOP_HOME/bin/hadoop jar $DIR/MethodOzuTest.jar $INPUT_DFS_DIR $OUTPUT_DFS_DIR
