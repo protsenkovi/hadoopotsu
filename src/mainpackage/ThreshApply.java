@@ -82,26 +82,15 @@ public class ThreshApply extends Configured implements Tool {
 			// reasons return unchanged piece.
 			// Not sure it is a right behavior, it's exception and produces
 			// unnecessary computations.
-			IplImage img = value.getImage();
-			;
-			IplImage imgray;
-			if (threshold != -1) {
-				imgray = cvCreateImage(cvGetSize(img), IPL_DEPTH_8U, 1);
-				cvCvtColor(img, imgray, CV_RGB2GRAY);
-				cvThreshold(imgray, imgray, threshold, 255, CV_THRESH_BINARY);
+			IplImage imgray = value.getImage();
+ 
+			cvThreshold(imgray, imgray, threshold, 255, CV_THRESH_BINARY);
 
-				StringBuilder b = new StringBuilder();
-				b.append(key.toString());
-				b.append(" " + width);
-				b.append(" " + height);
-				context.write(new Text(b.toString()), new Image(imgray));
-			} else {
-				StringBuilder b = new StringBuilder();
-				b.append(key.toString());
-				b.append(" " + width);
-				b.append(" " + height);
-				context.write(new Text(b.toString()), new Image(img));
-			}
+			StringBuilder b = new StringBuilder();
+			b.append(key.toString());
+			b.append(" " + width);
+			b.append(" " + height);
+			context.write(new Text(b.toString()), new Image(imgray));
 		}
 
 		private String getImageParameters(Text key, Configuration conf) throws IOException {
@@ -329,6 +318,7 @@ public class ThreshApply extends Configured implements Tool {
 		conf.setInt("mapreduce.imagerecordreader.windowoverlappercent", 0);
 		conf.setStrings("mapreduce.imagerecordreader.threshpath", args[1]);
 		conf.setBoolean("mapreduce.debug", true);
+        conf.setInt("mapreduce.imagerecordreader.iscolor", 0);
 
 		// Create job
 		Job job = new Job(conf);
