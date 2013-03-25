@@ -115,26 +115,15 @@ public class ImageRecordReader extends RecordReader<Text, Image> {
 	// Was modified
 	@Override
 	public boolean nextKeyValue() throws IOException, InterruptedException {
-		if (currentSplit < (totalXSplits * totalYSplits) && fileName != null) {
-
-			StringBuilder b = new StringBuilder();
-			b.append(fileName + " ");
-			b.append(image.getWidth() + " ");
-			b.append(image.getHeight());
+		if (currentSplit < (totalXSplits * totalYSplits) && fileName != null) {		
 			
-			
-			key = new Text(b.toString());
+			key = new Text(fileName);
 
 			if (totalXSplits * totalYSplits == 1) {
 				value = image;
 			} else {
 				value = getSubWindow();
 			}
-            
-            int x = currentSplit % totalXSplits;
-		    int y = currentSplit / totalYSplits;
-
-		    logger.log(java.util.logging.Level.INFO, "VLPR Reduce " + key.toString() + " " + x + " " + y + " widthPart " + value.getImage().width()	+ " heightPart " + value.getImage().height());
 
 			currentSplit += 1;
 			return true;

@@ -66,31 +66,22 @@ public class ThreshApply extends Configured implements Tool {
 			String width = "", height = "", record = "";
 			int threshold = -1;
 			
-			// image parameters record format: <filename> width height
+			// image parameters record format: <filename> threshold
 			record = getImageParameters(key, conf);
 			StringTokenizer tok = new StringTokenizer(record);
 			tok.nextToken();
-			width = tok.nextToken();
-			height = tok.nextToken();
 			threshold = Integer.valueOf(tok.nextToken());
 
 			if (debug) 
 				logger.log(java.util.logging.Level.INFO, "width " + width
 						+ " height " + height);
 
-			// Getting image piece. In case threshold is not found for some
-			// reasons return unchanged piece.
-			// Not sure it is a right behavior, it's exception and produces
-			// unnecessary computations.
+			// Getting image piece. 
 			IplImage imgray = value.getImage();
  
 			cvThreshold(imgray, imgray, threshold, 255, CV_THRESH_BINARY);
 
-			StringBuilder b = new StringBuilder();
-			b.append(key.toString());
-			b.append(" " + width);
-			b.append(" " + height);
-			context.write(new Text(b.toString()), new Image(imgray));
+			context.write(key, new Image(imgray, value.getWindow()));
 		}
 
 		private String getImageParameters(Text key, Configuration conf) throws IOException {
@@ -164,139 +155,31 @@ public class ThreshApply extends Configured implements Tool {
 			if (debug)
 				logger.log(java.util.logging.Level.INFO,
 						"VLPR ********************************* REDUCE key: "
-								+ key.toString());
-
-			// Retrieve filename, width, height of source image from key.
-			StringTokenizer tok = new StringTokenizer(key.toString());
-			String filename = tok.nextToken();
-			int width = Integer.valueOf(tok.nextToken());
-			int height = Integer.valueOf(tok.nextToken());
-
-			// Splits based on configuration parameters
-			int totalXSplits = 0;
-			int totalYSplits = 0;
-			int xSplitPixels = 0;
-			int ySplitPixels = 0;
-			int sizePercent = 0;
-			int sizePixel = 0;
-			int borderPixel = 0;
-			currentSplit = 0;
-			boolean byPixel = context.getConfiguration().getBoolean(
-					"mapreduce.imagerecordreader.windowbypixel", false);
-
-			// Ensure that value is not negative
-			borderPixel = context.getConfiguration().getInt(
-					"mapreduce.imagerecordreader.borderPixel", 0);
-			if (borderPixel < 0) {
-				borderPixel = 0;
-			}
-
-			// Ensure that percentage is between 0 and 100
-			sizePercent = context.getConfiguration().getInt(
-					"mapreduce.imagerecordreader.windowsizepercent", 100);
-			if (sizePercent < 0 || sizePercent > 100) {
-				sizePercent = 100;
-			}
-
-			// Ensure that value is not negative
-			sizePixel = context.getConfiguration().getInt(
-					"mapreduce.imagerecordreader.windowsizepixel",
-					Integer.MAX_VALUE);
-			if (sizePixel < 0) {
-				sizePixel = 0;
-			}
-
-			if (byPixel) {
-				xSplitPixels = sizePixel;
-				ySplitPixels = sizePixel;
-				totalXSplits = (int) Math.ceil(width
-						/ Math.min(xSplitPixels, width));
-				totalYSplits = (int) Math.ceil(height
-						/ Math.min(ySplitPixels, height));
-			} else {
-				xSplitPixels = (int) (width * (sizePercent / 100.0));
-				ySplitPixels = (int) (height * (sizePercent / 100.0));
-				totalXSplits = (int) Math.ceil(width
-						/ (double) Math.min(xSplitPixels, width));
-				totalYSplits = (int) Math.ceil(height
-						/ (double) Math.min(ySplitPixels, height));
-			}
-
-			IplImage bigimage = cvCreateImage(new CvSize(width, height),
-					IPL_DEPTH_8U, 1);
-			IplImage imagepart;
-			WindowInfo window;
-
+								+ key.toString());			
+			Image image;
+			IplImage bigimage = null;
+			IplImage imagepart = null;
+			
+			boolean first = true;
 			Iterator it = values.iterator();
 			while (it.hasNext()) {
-				imagepart = ((Image) it.next()).getImage();
-				window = new WindowInfo();
-				int widthPart = xSplitPixels;
-				int heightPart = ySplitPixels;
-				int x = currentSplit % totalXSplits;
-				int y = currentSplit / totalYSplits;
-
-                if (debug)
-                    logger.log(java.util.logging.Level.INFO, "VLPR Reduce " + key.toString() + " " + x + " " + y + " widthPart " + imagepart.width()	+ " heightPart " + imagepart.height());
-
-				// Deal with partial windows
-				if (x * xSplitPixels + widthPart > width) {
-					widthPart = width - x * xSplitPixels;
-				}
-				if (y * ySplitPixels + heightPart > height) {
-					heightPart = height - y * ySplitPixels;
+				image = (Image)it.next();
+				imagepart = image.getImage();
+				WindowInfo window = image.getWindow();
+				if (first) {
+					logger.log(java.util.logging.Level.INFO, "VLPR before cvCreate parentWidth:" + window.getParentWidth() + " parenHeight:" + window.getParentHeight());
+					bigimage = cvCreateImage(new CvSize(window.getParentWidth(), window.getParentHeight()), IPL_DEPTH_8U, 1);
+					first = false;
 				}
 
-				window.setParentInfo(x * xSplitPixels, y * ySplitPixels,
-						height, width);
-				window.setWindowSize(heightPart, widthPart);
-
-				// Calculate borders
-				int top = 0;
-				int bottom = 0;
-				int left = 0;
-				int right = 0;
-
-				if (window.getParentXOffset() > borderPixel) {
-					left = borderPixel;
-				}
-				if (window.getParentYOffset() > borderPixel) {
-					top = borderPixel;
-				}
-				if (window.getParentXOffset() + borderPixel + window.getWidth() < window
-						.getParentWidth()) {
-					right = borderPixel;
-				}
-				if (window.getParentYOffset() + borderPixel
-						+ window.getHeight() < window.getParentHeight()) {
-					bottom = borderPixel;
-				}
-
-				window.setBorder(top, bottom, left, right);
+				logger.log(java.util.logging.Level.INFO, "VLPR imagechannels " + imagepart.nChannels() + " imagedepth " + imagepart.depth());
 				CvRect roi = window.computeROI();
 
 				if (debug) {
-					logger.log(java.util.logging.Level.INFO,
-							"VLPR currentsplit " + currentSplit + " wPart: "
-									+ widthPart + " hPart: " + heightPart);
-					logger.log(java.util.logging.Level.INFO,
-							"VLPR imagechannels " + imagepart.nChannels()
-									+ " imagedepth " + imagepart.depth());
-					logger.log(java.util.logging.Level.INFO, "VLPR x: " + x
-							+ " y: " + y + " xSplitPixels: " + xSplitPixels
-							+ " ySplitPixels: " + ySplitPixels);
-					logger.log(java.util.logging.Level.INFO, "VLPR width  "
-							+ width);
-					logger.log(java.util.logging.Level.INFO, "VLPR height "
-							+ height);
-					logger.log(java.util.logging.Level.INFO,
-							"VLPR sizePercent " + sizePercent);
-					logger.log(java.util.logging.Level.INFO, "VLPR roi  w: "
-							+ roi.width() + " h: " + roi.height() + " x: "
-							+ roi.x() + " y:" + roi.y());
-					logger.log(java.util.logging.Level.INFO,
-							"VLPR border top: " + top + " bottom: " + bottom
-									+ " left: " + left + " right:" + right);
+					logger.log(java.util.logging.Level.INFO, "VLPR imagechannels " + imagepart.nChannels() + " imagedepth " + imagepart.depth());
+					logger.log(java.util.logging.Level.INFO, "VLPR width  "	+ image.getWidth());
+					logger.log(java.util.logging.Level.INFO, "VLPR height "	+ image.getHeight());
+					logger.log(java.util.logging.Level.INFO, "VLPR roi  w: " + roi.width() + " h: " + roi.height() + " x: "	+ roi.x() + " y:" + roi.y());
 				}
 
 				cvSetImageROI(bigimage, roi);
@@ -304,10 +187,8 @@ public class ThreshApply extends Configured implements Tool {
 				// copy sub-image
 				cvCopy(imagepart, bigimage, null);
 				cvResetImageROI(bigimage);
-
-				currentSplit++;
 			}
-			context.write(new Text(filename), new Image(bigimage));
+			context.write(key, new Image(bigimage));
 		}
 	}
 
