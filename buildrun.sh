@@ -4,6 +4,7 @@ INPUT_DFS_DIR=/user/hduser/method-otsu-in
 TMP_DFS_DIR=/user/hduser/tmp
 OUTPUT_DFS_DIR=/user/hduser/method-otsu-out
 echo $DIR
+echo $HADOOP_HOME
 
 ant
 

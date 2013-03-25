@@ -106,46 +106,32 @@ public class Histogram extends Configured implements Tool {
 				}
 			}
 
-			// Порог
-			// Введем два вспомогательных числа:
-			int m = 0; // m - сумма высот всех бинов, домноженных на положение
-						// их середины
-			int n = 0; // n - сумма высот всех бинов
+			int m = 0; 
+			int n = 0; 
 			for (int t = 0; t < 256; t++) {
 				m += t * histogram[t].get();
 				n += histogram[t].get();
 			}
 
-			float maxSigma = -1; // Максимальное значение межклассовой дисперсии
-			int threshold = 0; // Порог, соответствующий maxSigma
+			float maxSigma = -1; 
+			int threshold = 0;
 
-			int alpha1 = 0; // Сумма высот всех бинов для класса 1
-			int beta1 = 0; // Сумма высот всех бинов для класса 1, домноженных
-							// на положение их середины
+			int alpha1 = 0;
+			int beta1 = 0; 
 
-			// Переменная alpha2 не нужна, т.к. она равна m - alpha1
-			// Переменная beta2 не нужна, т.к. она равна n - alpha1
-
-			// t пробегается по всем возможным значениям порога
 			for (int t = 0; t < 256; t++) {
 				alpha1 += t * histogram[t].get();
 				beta1 += histogram[t].get();
 
-				// Считаем вероятность класса 1.
+				
 				float w1 = (float) beta1 / n;
-				// Нетрудно догадаться, что w2 тоже не нужна, т.к. она равна 1 -
-				// w1
-
-				// a = a1 - a2, где a1, a2 - средние арифметические для классов
-				// 1 и 2
+			
 				float a = (float) alpha1 / beta1 - (float) (m - alpha1)
 						/ (n - beta1);
 
-				// Наконец, считаем sigma
+				
 				float sigma = w1 * (1 - w1) * a * a;
 
-				// Если sigma больше текущей максимальной, то обновляем maxSigma
-				// и порог
 				if (sigma > maxSigma) {
 					maxSigma = sigma;
 					threshold = t;

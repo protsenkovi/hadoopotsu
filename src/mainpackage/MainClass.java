@@ -42,7 +42,7 @@ public class MainClass {
 		newargs[1] = tempdir;
 		newargs[2] = args[1];
 		args[1] = tempdir;
-		int res = ToolRunner.run(new Configuration(), new Histogram(), args);		
+		int res = ToolRunner.run(new Configuration(), new Histogram(), args);
 		int res2 = ToolRunner.run(new Configuration(), new ThreshApply(), newargs); 
 		System.exit(res);
 	}

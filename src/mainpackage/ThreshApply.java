@@ -247,6 +247,9 @@ public class ThreshApply extends Configured implements Tool {
 				int x = currentSplit % totalXSplits;
 				int y = currentSplit / totalYSplits;
 
+                if (debug)
+                    logger.log(java.util.logging.Level.INFO, "VLPR Reduce " + key.toString() + " " + x + " " + y + " widthPart " + imagepart.width()	+ " heightPart " + imagepart.height());
+
 				// Deal with partial windows
 				if (x * xSplitPixels + widthPart > width) {
 					widthPart = width - x * xSplitPixels;

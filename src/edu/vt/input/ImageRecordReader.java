@@ -4,6 +4,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.BufferedReader;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -30,7 +32,7 @@ import static com.googlecode.javacv.cpp.opencv_highgui.*;
 public class ImageRecordReader extends RecordReader<Text, Image> {
 
 	private static final Log LOG = LogFactory.getLog(ImageRecordReader.class);
-	
+	private static final Logger logger = Logger.getLogger(ImageRecordReader.class.getName());
 	// Image information
 	private String fileName = null;
 	private Image image = null;
@@ -128,6 +130,11 @@ public class ImageRecordReader extends RecordReader<Text, Image> {
 			} else {
 				value = getSubWindow();
 			}
+            
+            int x = currentSplit % totalXSplits;
+		    int y = currentSplit / totalYSplits;
+
+		    logger.log(java.util.logging.Level.INFO, "VLPR Reduce " + key.toString() + " " + x + " " + y + " widthPart " + value.getImage().width()	+ " heightPart " + value.getImage().height());
 
 			currentSplit += 1;
 			return true;
