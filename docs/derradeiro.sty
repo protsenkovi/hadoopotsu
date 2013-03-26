@@ -1,0 +1,201 @@
+\ProvidesPackage{derradeiro}
+
+\newif\if@literat
+\DeclareOption{literat}{\@literattrue}
+\DeclareOption{noliterat}{\@literatfalse}
+\newif\if@microtype
+\DeclareOption{microtype}{\@microtypetrue}
+\DeclareOption{nomicrotype}{\@microtypefalse}
+\newif\if@redcolor
+\DeclareOption{redcolor}{\@redcolortrue}
+\newif\if@bluecolor
+\DeclareOption{bluecolor}{\@bluecolortrue}
+\newif\if@nocolor
+\DeclareOption{nocolor}{\@nocolortrue}
+\newif\if@sans
+\DeclareOption{sans}{\@sanstrue}
+
+\ExecuteOptions{literat,microtype}
+\ProcessOptions
+
+
+\RequirePackage{mathrsfs}
+\RequirePackage[T2A]{fontenc} 
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[russian]{babel}
+\RequirePackage{multicol,multirow, graphicx,floatflt,grffile,mathrsfs,cmap, indentfirst, hyphenat}
+\RequirePackage{geometry}
+\RequirePackage{listings}
+\geometry{a4paper,left=3cm,right=1cm,top=2.3cm,bottom=2cm}
+	\parindent=7mm
+	\setlength{\leftmargini}{24pt}
+
+\RequirePackage{fancyhdr} 
+\lhead{}
+\chead{}
+\rhead{}
+\cfoot{\bfseries\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+
+\if@literat
+\RequirePackage{literat}
+\fi
+\if@microtype
+\RequirePackage{microtype}
+\fi
+\SetProtrusion
+{
+encoding = T2A,
+family = *
+}
+{
+« = {900,     },
+» = {    , 900},
+„ = {1000,     },
+“ = {    , 1000},
+( = {400,     },
+) = {    , 400},
+! = {    , 1000},
+? = {    , 1000},
+: = {    , 1000},
+; = {    , 1000},
+. = {    , 1000},
+- = {    ,  700},
+{,}= {    , 1000}
+}
+\DeclareMicrotypeSet{t2atext}{encoding=T2A}
+\UseMicrotypeSet{t2atext}
+
+\RequirePackage{amsmath,amssymb,amsthm,color,colortbl,misccorr} 
+\RequirePackage[labelsep=endash]{caption}
+\RequirePackage[pdftex,unicode, pdfborder = { 0 0 0}]{hyperref}
+\RequirePackage{subfig}
+\renewcommand{\thesubfigure}{\asbuk{subfigure}}
+
+\hyphenpenalty=6000
+\tolerance=1000
+
+\if@redcolor
+\definecolor{sections}{rgb}{0.5,0.1,0.1}
+\definecolor{subsections}{rgb}{0.4,0.1,0.1}
+\definecolor{subsubsections}{rgb}{0.3,0.1,0.1}
+\fi
+
+\if@bluecolor
+\definecolor{sections}{rgb}{0.07,0.07,0.4}
+\definecolor{subsections}{rgb}{0.05,0.05,0.3}
+\definecolor{subsubsections}{rgb}{0.04,0.04,0.2}
+\fi
+
+\if@nocolor
+\definecolor{sections}{rgb}{0,0,0}
+\definecolor{subsections}{rgb}{0,0,0}
+\definecolor{subsubsections}{rgb}{0,0,0}
+\fi
+
+
+\newtheoremstyle{qd}{4pt}{4pt}{}{}{\bfseries}{.}{.5em}{}
+\theoremstyle{qd}
+\newtheorem{defin}{Определение}[section]
+\theoremstyle{theorem}
+\newtheorem{lemma}{Лемма}[section]
+\newtheorem{theo}{Теорема}[section]
+\newtheorem{corollary}{Следствие}[subsection] 
+\renewcommand{\thetheo}{\bfseries\textcolor[rgb]{0.1,0.3,0.4}  {\arabic{section}\textcolor[rgb]{0,0,0}{.}\arabic{theo}}}
+\renewcommand{\thedefin}{\textcolor[rgb]{0.6,0.1,0.1}{\arabic{section}\textcolor[rgb]{0,0,0}{.}\arabic{defin}}}
+\renewcommand{\thelemma}{\textcolor[rgb]{0.6,0.2,0.6}{\arabic{section}\textcolor[rgb]{0,0,0}{.}\arabic{lemma}}}
+\renewcommand{\thecorollary}{\textcolor[rgb]{0.1,0.3,0.4}{\arabic{corollary}}}
+\newenvironment{qproof}
+{\normalfont\par\noindent{\textcolor[rgb]{0.1,0.2,0.25}{\bfseriesДоказательство.}}}
+{\textcolor[rgb]{0.2,0.2,0.4}{\hfill \small q.e.d.}\smallskip\par}
+\newenvironment{note}{\par\noindent\textcolor[rgb]{0.1,0.3,0.1}{\bfseriesЗамечание.}}{\smallskip\par}
+\newenvironment{example}[1]{\par\noindent\textbf{Пример. }{\itshape{#1}}\\}{\smallskip\par}
+\newcommand{\rmnum}[1]{\romannumeral #1}
+\newcommand{\Rmnum}[1]{\expandafter\@slowromancap\romannumeral #1@}
+\renewcommand{\section}{\@startsection{section}{1}{0pt}{-3.5explus-1exminus-.2ex}{2.3explus.2ex}{\color{sections}\normalfont\Large\bfseries
+\if@sans
+\sffamily
+\fi}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0pt}{-3.0ex plus -1ex minus-.2ex}{1.7ex plus.2ex}{\color{subsections}\normalfont\large\bfseries
+\if@sans
+\sffamily
+\fi}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{1}{0pt}{-3.0ex plus -1ex minus-.2ex}{1.7ex plus.2ex}{\color{subsubsections}\normalfont\large\bfseries
+\if@sans
+\sffamily
+\fi}}
+\abovedisplayskip=.5\abovedisplayskip
+\belowdisplayskip=.5\belowdisplayskip
+\input functions.tex
+\flushbottom
+
+\pagestyle{fancy}
+\lstset{
+ literate={а}{{\selectfont\char224}}1
+ {б}{{\selectfont\char225}}1
+ {в}{{\selectfont\char226}}1
+ {г}{{\selectfont\char227}}1
+ {д}{{\selectfont\char228}}1
+ {е}{{\selectfont\char229}}1
+ {ё}{{\"e}}1
+ {ж}{{\selectfont\char230}}1
+ {з}{{\selectfont\char231}}1
+ {и}{{\selectfont\char232}}1
+ {й}{{\selectfont\char233}}1
+ {к}{{\selectfont\char234}}1
+ {л}{{\selectfont\char235}}1
+ {м}{{\selectfont\char236}}1
+ {н}{{\selectfont\char237}}1
+ {о}{{\selectfont\char238}}1
+ {п}{{\selectfont\char239}}1
+ {р}{{\selectfont\char240}}1
+ {с}{{\selectfont\char241}}1
+ {т}{{\selectfont\char242}}1
+ {у}{{\selectfont\char243}}1
+ {ф}{{\selectfont\char244}}1
+ {х}{{\selectfont\char245}}1
+ {ц}{{\selectfont\char246}}1
+ {ч}{{\selectfont\char247}}1
+ {ш}{{\selectfont\char248}}1
+ {щ}{{\selectfont\char249}}1
+ {ъ}{{\selectfont\char250}}1
+ {ы}{{\selectfont\char251}}1
+ {ь}{{\selectfont\char252}}1
+ {э}{{\selectfont\char253}}1
+ {ю}{{\selectfont\char254}}1
+ {я}{{\selectfont\char255}}1
+ {А}{{\selectfont\char192}}1
+ {Б}{{\selectfont\char193}}1
+ {В}{{\selectfont\char194}}1
+ {Г}{{\selectfont\char195}}1
+ {Д}{{\selectfont\char196}}1
+ {Е}{{\selectfont\char197}}1
+ {Ё}{{\"E}}1
+ {Ж}{{\selectfont\char198}}1
+ {З}{{\selectfont\char199}}1
+ {И}{{\selectfont\char200}}1
+ {Й}{{\selectfont\char201}}1
+ {К}{{\selectfont\char202}}1
+ {Л}{{\selectfont\char203}}1
+ {М}{{\selectfont\char204}}1
+ {Н}{{\selectfont\char205}}1
+ {О}{{\selectfont\char206}}1
+ {П}{{\selectfont\char207}}1
+ {Р}{{\selectfont\char208}}1
+ {С}{{\selectfont\char209}}1
+ {Т}{{\selectfont\char210}}1
+ {У}{{\selectfont\char211}}1
+ {Ф}{{\selectfont\char212}}1
+ {Х}{{\selectfont\char213}}1
+ {Ц}{{\selectfont\char214}}1
+ {Ч}{{\selectfont\char215}}1
+ {Ш}{{\selectfont\char216}}1
+ {Щ}{{\selectfont\char217}}1
+ {Ъ}{{\selectfont\char218}}1
+ {Ы}{{\selectfont\char219}}1
+ {Ь}{{\selectfont\char220}}1
+ {Э}{{\selectfont\char221}}1
+ {Ю}{{\selectfont\char222}}1
+ {Я}{{\selectfont\char223}}1
+ }
