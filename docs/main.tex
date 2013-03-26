@@ -248,8 +248,9 @@
     192.168.0.1    master
     192.168.0.2    slave
 \end{lstlisting}
+	\textbf{Примечание.} Важно, чтобы имя компьютера совпадало с введёными сокращениями. В ходе установки было выяснено, что помимо перечисленных строчек, в hosts slave узла необходимо также добавить пару <<ip-адрес название удалённой машины>>, так как hadoop не мог разрешить имя компьютера и сопоставить ему адрес master узла.
 
-\noindent Для корректного функционирования Hadoop необходимо обеспечить SSH-соединение без ввода пароля. Для этого выполняем команду копирования ключа (создан в предыдущем разделе):
+ Для корректного функционирования Hadoop необходимо обеспечить SSH-соединение без ввода пароля. Для этого выполняем команду копирования ключа (создан в предыдущем разделе):
 \begin{lstlisting}[language=sh]
     hduser@master:~$ ssh-copy-id -i $HOME/.ssh/id_rsa.pub hduser@slave
 \end{lstlisting}
@@ -687,19 +688,25 @@
 \small
 \sloppy
 \subsection*{MainClass.java}
-\lstinputlisting[language=Java]{listings/MainClass.java}
+\lstinputlisting[language=Java]{../src/mainpackage/MainClass.java}
 \subsection*{Histogram.java}
-\lstinputlisting[language=Java]{listings/Histogram.java}
+\lstinputlisting[language=Java]{../src/mainpackage/Histogram.java}
 \subsection*{ThreshApply.java}
-\lstinputlisting[language=Java]{listings/ThreshApply.java}
+\lstinputlisting[language=Java]{../src/mainpackage/ThreshApply.java}
 \subsection*{ImageInputFormat.java}
-\lstinputlisting[language=Java]{listings/ImageInputFormat.java}
+\lstinputlisting[language=Java]{../src/edu/vt/input/ImageInputFormat.java}
 \subsection*{ImageRecordReader.java}
-\lstinputlisting[language=Java]{listings/ImageRecordReader.java}
+\lstinputlisting[language=Java]{../src/edu/vt/input/ImageRecordReader.java}
 \subsection*{LongArrayWritable.java}
-\lstinputlisting[language=Java]{listings/LongArrayWritable.java}
+\lstinputlisting[language=Java]{../src/edu/vt/io/LongArrayWritable.java}
 \subsection*{Image.java}
-\lstinputlisting[language=Java]{listings/Image.java}
+\lstinputlisting[language=Java]{../src/edu/vt/io/Image.java}
+\subsection*{ImageOutputFormat.java}
+\lstinputlisting[language=Java]{../src/edu/vt/output/ImageOutputFormat.java}
+\subsection*{ImageRecordWriter.java}
+\lstinputlisting[language=Java]{../src/edu/vt/output/ImageRecordWriter.java}
+\subsection*{WindowInfo.java}
+\lstinputlisting[language=Java]{../src/edu/vt/io/WindowInfo.java}
 %\subsection*{block.cpp}
 %\lstinputlisting[language=C++]{liitings/block.cpp}
 %\subsection*{eigen\_m.cpp}

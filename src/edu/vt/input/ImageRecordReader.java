@@ -4,7 +4,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.File;
 import java.io.BufferedReader;
-import java.util.logging.Logger;
 import java.util.logging.Level;
 
 import org.apache.commons.lang.StringUtils;
@@ -32,7 +31,6 @@ import static com.googlecode.javacv.cpp.opencv_highgui.*;
 public class ImageRecordReader extends RecordReader<Text, Image> {
 
 	private static final Log LOG = LogFactory.getLog(ImageRecordReader.class);
-	private static final Logger logger = Logger.getLogger(ImageRecordReader.class.getName());
 	// Image information
 	private String fileName = null;
 	private Image image = null;
