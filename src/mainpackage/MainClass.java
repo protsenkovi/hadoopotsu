@@ -14,22 +14,23 @@ import org.codehaus.jackson.map.util.ArrayBuilders;
 //
 // Map calculates partial histograms.
 // Map output: 
-//  key format - <filename> <width of original image> <height of original image>
+//  key format - <filename>
 //  value - list of histograms of image parts.
 // 
 // Reduce collects combined pairs of key defining source image file and list of histograms of all it's parts.
 // Each reduce method calculates threshold according to result histogram. This threshold would be written to tempdir path
 // in following format:
-//     <filename> <width> <height> <threshold> \newline 
+//     <filename> <threshold> \newline 
 //
 //
 // Second phase
-// similarly is run over the same images. Directory with files containing calculated thresholds is passed to algorithm
+// similarly is run over the same images. except they read as grayscale images(configuration parameter isColor == 0). 
+// Directory with files containing calculated thresholds is passed to algorithm
 // via Configuration: conf.setStrings("mapreduce.imagerecordreader.threshpath", args[1]); , where args[1] is a tempdir, 
 // output path for first map reduce job.
 // Division on parts remains unchanged.
 // 
-// Map finds a threshold for given image filename in all files were with thresholds, converts image to grayscale and applies threshold.
+// Map finds a threshold for given image filename in all files were with thresholds and applies threshold.
 //
 // Reduce collects parts and for each key stitch all parts together.
 public class MainClass {

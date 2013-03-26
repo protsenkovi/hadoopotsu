@@ -90,21 +90,8 @@ public class Histogram extends Configured implements Tool {
 		@Override
 		public void reduce(Text key, Iterable<LongArrayWritable> values,
 				Context context) throws IOException, InterruptedException {
-
-			// Initialize histogram array
-			LongWritable[] histogram = new LongWritable[256];
-			for (int i = 0; i < histogram.length; i++) {
-				histogram[i] = new LongWritable();
-			}
-
-			// Sum the parts
 			Iterator<LongArrayWritable> it = values.iterator();
-			while (it.hasNext()) {
-				LongWritable[] part = (LongWritable[]) it.next().toArray();
-				for (int i = 0; i < histogram.length; i++) {
-					histogram[i].set(histogram[i].get() + part[i].get());
-				}
-			}
+			LongWritable[] histogram = (LongWritable[]) it.next().toArray();			
 
 			int m = 0; 
 			int n = 0; 
