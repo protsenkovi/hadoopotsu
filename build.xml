@@ -4,7 +4,7 @@
 	<property name="build" location="build"/>
 	<property name="lib" location="lib"/>
 	<property name="ECLIPSE_HOME" value="E:/Program Files/eclipse"/>	
-	<property name="jarname" location="MethodOzuTest.jar"/>
+	<property name="jarname" location="MethodOzu.jar"/>
 
 	<condition property="isWindows86">
         <and>

@@ -11,4 +11,4 @@ sudo -u hduser $HADOOP_HOME/bin/hadoop dfs -rmr $OUTPUT_DFS_DIR
 
 sudo -u hduser $HADOOP_HOME/bin/hadoop dfs -copyFromLocal $DIR/input $INPUT_DFS_DIR
 
-sudo -u hduser $HADOOP_HOME/bin/hadoop jar $DIR/MethodOzuTest.jar $INPUT_DFS_DIR $OUTPUT_DFS_DIR
+sudo -u hduser $HADOOP_HOME/bin/hadoop jar $DIR/MethodOzu.jar $INPUT_DFS_DIR $OUTPUT_DFS_DIR
