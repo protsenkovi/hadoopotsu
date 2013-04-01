@@ -1,2 +1,2 @@
-rm -r compiled
+rmdir /Q /S compiled
 mkdir compiled

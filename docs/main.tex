@@ -664,6 +664,59 @@
 \end{lstlisting}
 
 \newpage
+\section{Эксперимент на крупноформатном изображении}
+
+
+	Для тестирования было скачано два изображения разрешением 21600x21600 с сайта\\ \href{http://visibleearth.nasa.gov/view.php?id=73776}{http://visibleearth.nasa.gov/view.php?id=73776}: world.topo.bathy.200408.3x21600x21600.D2.png, world.topo.bathy.200408.3x21600x21600.A1.png. Для краткости сократим название до D2.png и A1.png соответственно.
+
+\subsection{Результаты эксперимента}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/austr.png}
+	\caption{Результат бинаризации первого изображения, D2.png}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{images/alaska.png}
+	\caption{Результат бинаризации второго изображения, A1.png}
+\end{figure}
+
+\begin{table}[h]
+	\begin{tabular}{|c|c|c|c|}
+		Изображение& Размер исходного & Размер обработанного & Коэффициент сжатия\\ \hline
+		D2.png&205Мб&1.3Мб&157,6\\
+		A1.png&271Мб&869Кб&319,3\\
+	\end{tabular}
+	\caption{Характеристики изображений}
+\end{table}
+
+\subsection{Настройки среды для проведения эксперимента}
+
+	В несжатом виде изображения разрешения 21600x21600 занимают приблизительно 1.4Гб памяти, что накладывает ограничение на используемое аппаратное обеспечение. Тестирование проводилось на компьютере с 8Гб оперативной памяти. Перед запуском кластера либо Karmasphere необходимо увеличить размер максимального значения доступной памяти jvm:
+\begin{itemize}
+	\item Для Karmasphere в папке установки eclipse в файле eclipse.ini установить опцию 
+	\begin{lstlisting}[language=sh]
+		-Xmx4096m
+	\end{lstlisting}
+	\textbf{Примечание.} Данный размер носит рекомендательный характер и является достаточным для выполнения алгоритма на тестируемых изображениях.
+	\item Для hadoop кластера необходимо добавить аналогичную опцию в mapred-site.xml для фазы map и reduce
+\begin{lstlisting}[language=xml]
+    <property>
+        <name>mapred.map.child.java.opts</name>
+        <value>-Xmx4096M</value>
+    </property>
+    <property>
+        <name>mapred.reduce.child.java.opts</name>
+        <value>-Xmx4096M</value>
+    </property>
+\end{lstlisting}
+\end{itemize}
+
+
+
+\newpage
 \section{Описание среды}
 
 \subsection{Классификация версий Apache Hadoop}
