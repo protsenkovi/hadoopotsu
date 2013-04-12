@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.12.18)  7 APR 2013 21:32
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.12.18)  12 APR 2013 15:05
 entering extended mode
 **main.tex
 (E:\develop\eclipseworkspace\methodozu\docs\main.tex
@@ -1159,26 +1159,68 @@ l.15 \newpage
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 39--40
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 40--41
-
- []
-
-[2]
 LaTeX Font Info:    Font shape `T2A/tli/bx/n' in size <14.4> not available
-(Font)              Font shape `T2A/tli/b/n' tried instead on input line 46.
+(Font)              Font shape `T2A/tli/b/n' tried instead on input line 24.
 
-Overfull \hbox (17.85898pt too wide) in paragraph at lines 50--51
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 45--46
+
+ []
+
+[2] <images/apple.png, id=138, 1409.265pt x 492.84125pt>
+File: images/apple.png Graphic file (type png)
+
+<use images/apple.png>
+Package pdftex.def Info: images/apple.png used on input line 56.
+(pdftex.def)             Requested size: 435.32422pt x 152.23775pt.
+ <images/gist1.png, id=139, 1184.92688pt x 630.10406pt>
+File: images/gist1.png Graphic file (type png)
+
+<use images/gist1.png>
+Package pdftex.def Info: images/gist1.png used on input line 62.
+(pdftex.def)             Requested size: 435.32422pt x 231.49075pt.
+ [3 <E:/develop/eclipseworkspace/methodozu/docs/images/apple.png> <E:/develop/e
+clipseworkspace/methodozu/docs/images/gist1.png>]
+<images/mastercard.png, id=149, 1027.84pt x 513.92pt>
+File: images/mastercard.png Graphic file (type png)
+
+<use images/mastercard.png>
+Package pdftex.def Info: images/mastercard.png used on input line 71.
+(pdftex.def)             Requested size: 435.32422pt x 217.66422pt.
+
+<images/gist2.png, id=150, 1169.11781pt x 630.85687pt>
+File: images/gist2.png Graphic file (type png)
+ <use images/gist2.png>
+Package pdftex.def Info: images/gist2.png used on input line 77.
+(pdftex.def)             Requested size: 435.32422pt x 234.90543pt.
+
+[4 <E:/develop/eclipseworkspace/methodozu/docs/images/mastercard.png> <E:/devel
+op/eclipseworkspace/methodozu/docs/images/gist2.png>]
+<images/textorg.png, id=159, 552.3837pt x 151.0443pt>
+File: images/textorg.png Graphic file (type png)
+ <use images/textorg.png>
+Package pdftex.def Info: images/textorg.png used on input line 88.
+(pdftex.def)             Requested size: 386.95897pt x 105.81094pt.
+
+<images/textbin.png, id=160, 552.3837pt x 151.0443pt>
+File: images/textbin.png Graphic file (type png)
+ <use images/textbin.png>
+Package pdftex.def Info: images/textbin.png used on input line 93.
+(pdftex.def)             Requested size: 386.95897pt x 105.81094pt.
+
+[5 <E:/develop/eclipseworkspace/methodozu/docs/images/textorg.png> <E:/develop/
+eclipseworkspace/methodozu/docs/images/textbin.png>]
+Overfull \hbox (17.85898pt too wide) in paragraph at lines 102--103
 [][]\T2A/tli/m/n/12 (-20) http://www.michael-noll.com/tutorials/running-hadoop-
 on-ubuntu-linux-single-node-cluster/[] 
  []
 
 
-Overfull \hbox (14.4134pt too wide) in paragraph at lines 51--52
+Overfull \hbox (14.4134pt too wide) in paragraph at lines 103--104
 [][]\T2A/tli/m/n/12 (-20) http://www.michael-noll.com/tutorials/running-hadoop-
 on-ubuntu-linux-multi-node-cluster/[] 
  []
@@ -1186,206 +1228,197 @@ on-ubuntu-linux-multi-node-cluster/[]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-LaTeX Font Info:    Try loading font information for OMS+tli on input line 65.
-LaTeX Font Info:    No file OMStli.fd. on input line 65.
+LaTeX Font Info:    Try loading font information for OMS+tli on input line 117.
+
+LaTeX Font Info:    No file OMStli.fd. on input line 117.
 
 
 LaTeX Font Warning: Font shape `OMS/tli/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textasteriskcentered' on input line 65.
+(Font)              for symbol `textasteriskcentered' on input line 117.
 
 
-Overfull \hbox (0.23038pt too wide) in paragraph at lines 70--71
+Overfull \hbox (0.23038pt too wide) in paragraph at lines 122--123
 [][]\T2A/tli/m/n/12 (-20) http://www.oracle.com/technetwork/java/javase/downloa
 ds/jdk7-downloads-1880260.html[] 
  []
 
 LaTeX Font Info:    Font shape `T2A/tli/bx/n' in size <10.95> not available
-(Font)              Font shape `T2A/tli/b/n' tried instead on input line 109.
-[3] [4] ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+(Font)              Font shape `T2A/tli/b/n' tried instead on input line 161.
+[6
+
+] [7] ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-) [5]
-<images/1.png, id=248, 546.54187pt x 462.97969pt>
+) [8]
+<images/1.png, id=294, 546.54187pt x 462.97969pt>
 File: images/1.png Graphic file (type png)
  <use images/1.png>
-Package pdftex.def Info: images/1.png used on input line 228.
+Package pdftex.def Info: images/1.png used on input line 280.
 (pdftex.def)             Requested size: 338.58632pt x 286.81836pt.
 
-<images/2.png, id=249, 543.53062pt x 176.91093pt>
+<images/2.png, id=295, 543.53062pt x 176.91093pt>
 File: images/2.png Graphic file (type png)
  <use images/2.png>
-Package pdftex.def Info: images/2.png used on input line 234.
+Package pdftex.def Info: images/2.png used on input line 286.
 (pdftex.def)             Requested size: 338.58632pt x 110.21002pt.
 
-<images/3.png, id=250, 444.15938pt x 121.20282pt>
+<images/3.png, id=296, 444.15938pt x 121.20282pt>
 File: images/3.png Graphic file (type png)
  <use images/3.png>
-Package pdftex.def Info: images/3.png used on input line 240.
+Package pdftex.def Info: images/3.png used on input line 292.
 (pdftex.def)             Requested size: 338.58632pt x 92.3925pt.
- [6 <E:/develop/eclipseworkspace/methodozu/docs/images/1.png (PNG copy)> <E:/de
+ [9 <E:/develop/eclipseworkspace/methodozu/docs/images/1.png (PNG copy)> <E:/de
 velop/eclipseworkspace/methodozu/docs/images/2.png (PNG copy)> <E:/develop/ecli
 pseworkspace/methodozu/docs/images/3.png (PNG copy)>]
-Overfull \hbox (9.05711pt too wide) in paragraph at lines 264--265
+Overfull \hbox (9.05711pt too wide) in paragraph at lines 316--317
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 
-Overfull \hbox (9.05711pt too wide) in paragraph at lines 271--272
+Overfull \hbox (9.05711pt too wide) in paragraph at lines 323--324
 [][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-<images/two-node-cluster.png, id=259, 521.95pt x 405.515pt>
+<images/two-node-cluster.png, id=304, 521.95pt x 405.515pt>
 File: images/two-node-cluster.png Graphic file (type png)
 
 <use images/two-node-cluster.png>
-Package pdftex.def Info: images/two-node-cluster.png used on input line 279.
+Package pdftex.def Info: images/two-node-cluster.png used on input line 331.
 (pdftex.def)             Requested size: 241.84843pt x 187.90044pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[7
+[10
 
-] [8 <E:/develop/eclipseworkspace/methodozu/docs/images/two-node-cluster.png (P
-NG copy)>] [9] [10] <images/4.png, id=360, 449.42906pt x 224.33812pt>
+] [11 <E:/develop/eclipseworkspace/methodozu/docs/images/two-node-cluster.png (
+PNG copy)>] [12] [13] <images/4.png, id=406, 449.42906pt x 224.33812pt>
 File: images/4.png Graphic file (type png)
 
 <use images/4.png>
-Package pdftex.def Info: images/4.png used on input line 384.
+Package pdftex.def Info: images/4.png used on input line 436.
 (pdftex.def)             Requested size: 435.32422pt x 217.30647pt.
- <images/5.png, id=361, 449.42906pt x 155.07938pt>
+ <images/5.png, id=407, 449.42906pt x 155.07938pt>
 File: images/5.png Graphic file (type png)
 
 <use images/5.png>
-Package pdftex.def Info: images/5.png used on input line 388.
+Package pdftex.def Info: images/5.png used on input line 440.
 (pdftex.def)             Requested size: 435.32422pt x 150.21855pt.
- [11 <E:/develop/eclipseworkspace/methodozu/docs/images/4.png (PNG copy)> <E:/d
+ [14 <E:/develop/eclipseworkspace/methodozu/docs/images/4.png (PNG copy)> <E:/d
 evelop/eclipseworkspace/methodozu/docs/images/5.png (PNG copy)>] <images/mapred
-ucejob.png, id=370, 697.10437pt x 234.1247pt>
+ucejob.png, id=416, 697.10437pt x 234.1247pt>
 File: images/mapreducejob.png Graphic file (type png)
 
 <use images/mapreducejob.png>
-Package pdftex.def Info: images/mapreducejob.png used on input line 414.
+Package pdftex.def Info: images/mapreducejob.png used on input line 466.
 (pdftex.def)             Requested size: 483.69687pt x 162.45003pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 418--419
+Underfull \hbox (badness 10000) in paragraph at lines 470--471
 
  []
 
-<images/getsplits.png, id=372, 408.02437pt x 178.41656pt>
+<images/getsplits.png, id=417, 408.02437pt x 178.41656pt>
 File: images/getsplits.png Graphic file (type png)
 
 <use images/getsplits.png>
-Package pdftex.def Info: images/getsplits.png used on input line 422.
+Package pdftex.def Info: images/getsplits.png used on input line 474.
 (pdftex.def)             Requested size: 290.22107pt x 126.91075pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[12
+[15
 
  <E:/develop/eclipseworkspace/methodozu/docs/images/mapreducejob.png>]
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-Underfull \hbox (badness 10000) in paragraph at lines 472--473
+Underfull \hbox (badness 10000) in paragraph at lines 524--525
 
  []
 
-[13 <E:/develop/eclipseworkspace/methodozu/docs/images/getsplits.png>] [14]
-[15] [16] <images/windows-compile.png, id=498, 509.65407pt x 293.59688pt>
+[16 <E:/develop/eclipseworkspace/methodozu/docs/images/getsplits.png>] [17]
+[18] [19] [20] <images/windows-compile.png, id=547, 509.65407pt x 293.59688pt>
 File: images/windows-compile.png Graphic file (type png)
 
 <use images/windows-compile.png>
-Package pdftex.def Info: images/windows-compile.png used on input line 625.
+Package pdftex.def Info: images/windows-compile.png used on input line 682.
 (pdftex.def)             Requested size: 386.95897pt x 222.92537pt.
 
-<images/eclipse-hadoop-services.png, id=499, 528.47438pt x 496.85625pt>
+<images/eclipse-hadoop-services.png, id=548, 528.47438pt x 496.85625pt>
 File: images/eclipse-hadoop-services.png Graphic file (type png)
 
 <use images/eclipse-hadoop-services.png>
 Package pdftex.def Info: images/eclipse-hadoop-services.png used on input line 
-631.
+688.
 (pdftex.def)             Requested size: 314.40001pt x 295.59143pt.
- [17 <E:/develop/eclipseworkspace/methodozu/docs/images/windows-compile.png> <E
+ [21 <E:/develop/eclipseworkspace/methodozu/docs/images/windows-compile.png> <E
 :/develop/eclipseworkspace/methodozu/docs/images/eclipse-hadoop-services.png>]
-<images/eclipse-create-job.png, id=506, 689.57625pt x 482.55281pt>
+<images/eclipse-create-job.png, id=555, 689.57625pt x 482.55281pt>
 File: images/eclipse-create-job.png Graphic file (type png)
 
 <use images/eclipse-create-job.png>
-Package pdftex.def Info: images/eclipse-create-job.png used on input line 640.
+Package pdftex.def Info: images/eclipse-create-job.png used on input line 697.
 (pdftex.def)             Requested size: 483.69687pt x 338.48415pt.
 
-<images/charlie.png, id=507, 771.63281pt x 465.99094pt>
+<images/charlie.png, id=556, 771.63281pt x 465.99094pt>
 File: images/charlie.png Graphic file (type png)
 
 <use images/charlie.png>
-Package pdftex.def Info: images/charlie.png used on input line 648.
+Package pdftex.def Info: images/charlie.png used on input line 705.
 (pdftex.def)             Requested size: 290.22107pt x 175.26523pt.
- [18
+ [22
 
  <E:/develop/eclipseworkspace/methodozu/docs/images/eclipse-create-job.png> <E:
-/develop/eclipseworkspace/methodozu/docs/images/charlie.png>] [19
+/develop/eclipseworkspace/methodozu/docs/images/charlie.png>] [23
 
 ]
-Overfull \hbox (3.59187pt too wide) in paragraph at lines 670--671
+Overfull \hbox (3.59187pt too wide) in paragraph at lines 727--728
 []\T2A/tli/m/n/12 (-20) http://visibleearth.nasa.gov/view.php?id=73776[]: world
 .topo.bathy.200408.3x21600x21600.D2.png,
  []
 
-<images/austr.png, id=525, 1284.8pt x 642.4pt>
+<images/austr.png, id=573, 1284.8pt x 642.4pt>
 File: images/austr.png Graphic file (type png)
  <use images/austr.png>
-Package pdftex.def Info: images/austr.png used on input line 676.
+Package pdftex.def Info: images/austr.png used on input line 733.
 (pdftex.def)             Requested size: 386.95897pt x 193.47626pt.
 
-<images/alaska.png, id=526, 1284.8pt x 642.4pt>
+<images/alaska.png, id=574, 1284.8pt x 642.4pt>
 File: images/alaska.png Graphic file (type png)
  <use images/alaska.png>
-Package pdftex.def Info: images/alaska.png used on input line 682.
+Package pdftex.def Info: images/alaska.png used on input line 739.
 (pdftex.def)             Requested size: 386.95897pt x 193.47626pt.
 
-[20 <E:/develop/eclipseworkspace/methodozu/docs/images/austr.png> <E:/develop/e
+[24 <E:/develop/eclipseworkspace/methodozu/docs/images/austr.png> <E:/develop/e
 clipseworkspace/methodozu/docs/images/alaska.png>]
-<images/memprofjob.png, id=534, 580.41844pt x 386.94562pt>
+<images/memprofjob.png, id=583, 580.41844pt x 386.94562pt>
 File: images/memprofjob.png Graphic file (type png)
 
 <use images/memprofjob.png>
-Package pdftex.def Info: images/memprofjob.png used on input line 720.
+Package pdftex.def Info: images/memprofjob.png used on input line 777.
 (pdftex.def)             Requested size: 483.69687pt x 322.46964pt.
- [21 <E:/develop/eclipseworkspace/methodozu/docs/images/memprofjob.png>] [22
+ [25 <E:/develop/eclipseworkspace/methodozu/docs/images/memprofjob.png>] [26
 
 ]
-(E:\develop\eclipseworkspace\methodozu\src\mainpackage\MainClass.java [23
+(E:\develop\eclipseworkspace\methodozu\src\mainpackage\MainClass.java [27
 
 ])
-(E:\develop\eclipseworkspace\methodozu\src\mainpackage\Histogram.java [24]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [25]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [26])
-(E:\develop\eclipseworkspace\methodozu\src\mainpackage\ThreshApply.java
-[27]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28]
+(E:\develop\eclipseworkspace\methodozu\src\mainpackage\Histogram.java [28]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [29]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [30]
+ [30])
+(E:\develop\eclipseworkspace\methodozu\src\mainpackage\ThreshApply.java
+[31]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31])
-(E:\develop\eclipseworkspace\methodozu\src\edu\vt\input\ImageInputFormat.java)
-(E:\develop\eclipseworkspace\methodozu\src\edu\vt\input\ImageRecordReader.java
-[32]
+ [32]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [33]
@@ -1394,59 +1427,71 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [34]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [35]
+ [35])
+(E:\develop\eclipseworkspace\methodozu\src\edu\vt\input\ImageInputFormat.java)
+(E:\develop\eclipseworkspace\methodozu\src\edu\vt\input\ImageRecordReader.java
+[36]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [36])
-(E:\develop\eclipseworkspace\methodozu\src\edu\vt\io\LongArrayWritable.java
-[37]) (E:\develop\eclipseworkspace\methodozu\src\edu\vt\io\Image.java [38]
+ [37]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [39]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [40])
+(E:\develop\eclipseworkspace\methodozu\src\edu\vt\io\LongArrayWritable.java
+[41]) (E:\develop\eclipseworkspace\methodozu\src\edu\vt\io\Image.java [42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [44])
 (E:\develop\eclipseworkspace\methodozu\src\edu\vt\output\ImageOutputFormat.java
-[41])
+[45])
 (E:\develop\eclipseworkspace\methodozu\src\edu\vt\output\ImageRecordWriter.java
-[42]) (E:\develop\eclipseworkspace\methodozu\src\edu\vt\io\WindowInfo.java
-[43]
+[46]) (E:\develop\eclipseworkspace\methodozu\src\edu\vt\io\WindowInfo.java
+[47]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [44]
+ [48]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [45])
-(E:\develop\eclipseworkspace\methodozu\build.xml [46]
+ [49])
+(E:\develop\eclipseworkspace\methodozu\build.xml [50]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [47])
-(E:\develop\eclipseworkspace\methodozu\buildrun.sh [48])
+ [51])
+(E:\develop\eclipseworkspace\methodozu\buildrun.sh [52])
 (E:\develop\eclipseworkspace\methodozu\run.sh)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 792.
- [49]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 792.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 849.
+ [53]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 849.
 
 (E:\develop\eclipseworkspace\methodozu\docs\compiled\main.aux
 (E:\develop\eclipseworkspace\methodozu\docs\compiled\title.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 792.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 792.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 849.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 849.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 17A88D5A2070D07D7319DE8803ABB026;4821.
+(rerunfilecheck)             Checksum: 52BF95EB403DE3D99993BA810612B770;5382.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 792.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 849.
  ) 
 Here is how much of TeX's memory you used:
- 18758 strings out of 493921
- 270504 string characters out of 3147272
- 489822 words of memory out of 3000000
- 19595 multiletter control sequences out of 15000+200000
- 71996 words of font info for 331 fonts, out of 3000000 for 9000
+ 18803 strings out of 493921
+ 271325 string characters out of 3147272
+ 490172 words of memory out of 3000000
+ 19622 multiletter control sequences out of 15000+200000
+ 72485 words of font info for 335 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 43i,12n,51p,1052b,2068s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 43i,12n,51p,1083b,2068s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTe
@@ -1458,9 +1503,9 @@ it55_is.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/paragrap/literat/lit55_t1.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/paragrap/literat/lit56_is.pfb><C:/
 Program Files/MiKTeX 2.9/fonts/type1/paragrap/literat/lit75_is.pfb>
 Output written on E:/develop/eclipseworkspace/methodozu/docs/compiled/main.pdf 
-(50 pages, 2844241 bytes).
+(54 pages, 4809670 bytes).
 PDF statistics:
- 2371 PDF objects out of 2487 (max. 8388607)
- 1712 named destinations out of 1728 (max. 500000)
- 100592 words of extra memory for PDF output out of 106986 (max. 10000000)
+ 2421 PDF objects out of 2487 (max. 8388607)
+ 1725 named destinations out of 1728 (max. 500000)
+ 100646 words of extra memory for PDF output out of 106986 (max. 10000000)
 
