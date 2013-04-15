@@ -1,0 +1,5 @@
+Hadoop version of method Otsu. Based on javacv http://code.google.com/p/javacv/ and hadoop-computer-vision http://code.google.com/p/hadoop-computer-vision/.
+
+Scales with number of images.
+
+Was made in the parallel programming laboratory scope.
